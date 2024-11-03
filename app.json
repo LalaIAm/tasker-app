@@ -18,10 +18,19 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.lalaiam.tasker"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2bc70498-691f-466b-a4dc-d6d3129af492"
+      }
+    },
+    "plugins": [
+      "expo-secure-store"
+    ]
   }
 }
