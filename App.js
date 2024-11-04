@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ABeeZee_400Regular, useFonts } from '@expo-google-fonts/abeezee'
 import { Poppins_400Regular, Poppins_600SemiBold, Poppins_900Black } from '@expo-google-fonts/poppins'
 import { AppStack, AuthStack } from "./Navigation";
+import 'expo-dev-client'
 
 const AuthContext = createContext();
 
@@ -19,9 +20,6 @@ export default function App() {
     'PoppinsBlack': Poppins_900Black
   });
 
-  if (!fontsLoaded) {
-    return null;
-  }
 
 
   const [state, dispatch] = useReducer(
@@ -80,11 +78,18 @@ export default function App() {
     []
   );
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      documentTitle={{
+      enabled: false
+    }}>
       <AuthContext.Provider value={authContext}>
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{
+          headerBackVisible: false, headerShown: false
+        }}>
           {state.userToken == null ? (
-            <Stack.Screen name="Auth" component={AuthStack} />
+            <Stack.Screen name="Auth" component={AuthStack} options={{
+              headerShown: false
+            }} />
           ) : (
               <Stack.Navigator name='App' component={AppStack} />
           )}
@@ -94,11 +99,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+
